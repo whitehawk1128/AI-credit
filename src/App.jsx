@@ -17,7 +17,7 @@ function App() {
     onAuthStateChanged(auth, async (u) => {
       if (u) {
         setUser(u);
-        const res = await axios.get(`http://localhost:3001/credits/${u.uid}`);
+        const res = await axios.get(`https://credit-backend-production.up.railway.app/credits/${u.uid}`);
         setCredits(res.data.credits);
       }
     });
@@ -26,18 +26,18 @@ function App() {
   const signIn = () => signInWithPopup(auth, provider);
 
   const handleGenerate = async () => {
-    const res = await axios.post('http://localhost:3001/generate', {
+    const res = await axios.post('https://credit-backend-production.up.railway.app/generate', {
       prompt: input,
       uid: user.uid,
     });
     setOutput(res.data.text);
 
-    const updated = await axios.get(`http://localhost:3001/credits/${user.uid}`);
+    const updated = await axios.get(`https://credit-backend-production.up.railway.app/credits/${user.uid}`);
     setCredits(updated.data.credits);
   };
 
   const buyCredits = async () => {
-    const res = await axios.post('http://localhost:3001/create-checkout-session', {
+    const res = await axios.post('https://credit-backend-production.up.railway.app/create-checkout-session', {
       uid: user.uid,
     });
     window.location.href = res.data.url;
