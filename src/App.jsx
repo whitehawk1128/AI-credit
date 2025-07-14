@@ -44,21 +44,40 @@ function App() {
   };
 
   return (
-    <div className="container">
-      {!user ? (
-        <button onClick={signIn}>Sign in with Google</button>
-      ) : (
-        <>
-          <p>Credits: {credits}</p>
-          <textarea value={input} onChange={(e) => setInput(e.target.value)} placeholder="Enter your prompt here..." />
-          <button onClick={handleGenerate} disabled={credits <= 0}>Generate</button>
-          <button onClick={buyCredits}>Buy Credits</button>
-          <div className="response-box">{output}</div>
-        </>
-      )}
+    <div className="page">
+      <div className="header">
+        {user && (
+          <>
+            <span className="credit-info">{credits} credits left</span>
+            <button className="btn buy" onClick={buyCredits}>Buy Credits</button>
+            <img className="avatar" src={user.photoURL} alt="Avatar" />
+          </>
+        )}
+        {!user && (
+          <button className="btn buy" onClick={signIn}>Sign in with Google</button>
+        )}
+      </div>
+      
+      <div className="main-content">
+        <div className="card">
+          <p className="output-text">{output}</p>
+          <textarea
+            className="textarea"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Type something..."
+            disabled={!user}
+          />
+          <button className="btn generate" onClick={handleGenerate} disabled={!user || credits <= 0}>
+            Generate
+          </button>
+        </div>
+      </div>
     </div>
 
   );
+
+
 }
 
 export default App;
