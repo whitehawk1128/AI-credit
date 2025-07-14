@@ -1,6 +1,6 @@
 /* Page */
 .page {
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw; /* <- this ensures full width */
   background: linear-gradient(135deg, #6d88a3, #5a738b);
   padding: 20px;
@@ -84,5 +84,36 @@
 }
 
 .btn.generate {
-  float: right;
+  align-self: flex-end;
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding: 16px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  .textarea {
+    height: 60px;
+    font-size: 13px;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .output-text {
+    font-size: 14px;
+  }
 }
